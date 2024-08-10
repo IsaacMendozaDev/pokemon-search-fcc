@@ -1,0 +1,123 @@
+@import url("https://fonts.cdnfonts.com/css/pokemon-solid");
+@import url("https://fonts.googleapis.com/css2?family=VT323&display=swap");
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --f-family-pokemon: "Pokemon Solid", system-ui, sans-serif;
+  --f-family-tech-mono: "Share Tech Mono", system-ui, sans-serif;
+  --f-family-vt323: "VT323", system-ui, sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: var(--f-family-vt323);
+}
+
+body {
+  max-width: 100dvw;
+  height: 100dvh;
+
+  padding: 0rem 1rem;
+
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  grid-template-columns: minmax(0%, 1200px);
+
+  background: radial-gradient(circle at bottom left, #1e90ff, transparent 70%),
+    radial-gradient(circle at top right, #1e90ff, transparent 70%), #0f0f0f;
+}
+.title {
+  font-size: calc(4rem + 2dvw);
+  font-family: var(--f-family-pokemon);
+  font-weight: 500;
+
+  letter-spacing: 4px;
+
+  color: black;
+  -webkit-text-fill-color: yellow;
+  -webkit-text-stroke: 3px blue;
+
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000,
+    -1px 1px 0 #000, 1px 1px 0 #000;
+}
+.pokedex {
+  width: 100%;
+
+  padding: 1rem;
+
+  font-size: calc(1.8rem + 0.5dvw);
+
+  backdrop-filter: blur(10px);
+
+  background: rgba(255, 0, 0, 0.2);
+
+  border-radius: 8px;
+  border: 1px solid hsla(0, 97%, 60%, 0.6);
+
+  .search-section {
+    width: 100%;
+
+    text-align: center;
+
+    .search-input-btn {
+      max-width: 400px;
+
+      flex-direction: row;
+      justify-content: space-between;
+
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+
+      background: rgba(255, 255, 255, 0.2);
+
+      border-radius: 50px;
+      border: 1px solid rgb(201, 201, 201);
+
+      /*TODO: FIXING BOTTOM SPACE IN THE INPUT AND COMPLETE THE OTHER STYLES */
+      .input {
+        padding: 0.3rem;
+
+        font-size: calc(1.4rem + 0.5dvw);
+
+        color: #f7f7f7;
+
+        background: none;
+
+        border: none;
+        border-bottom: 1px solid transparent;
+
+        outline: none;
+
+        transition: all 0.6s ease;
+      }
+      .input::placeholder {
+        color: #f7f7f7;
+        transition: all 0.3s ease;
+      }
+      .input:focus {
+        border-bottom-color: white;
+      }
+      .input:focus::placeholder {
+        opacity: 0;
+      }
+
+      .btn {
+        width: 40px;
+        height: 40px;
+
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .title {
+    font-size: 1rem;
+  }
+}
