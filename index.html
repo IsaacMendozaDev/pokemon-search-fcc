@@ -16,7 +16,7 @@
     ></script>
   </head>
   <body>
-    <h1 class="title">Pokedex</h1>
+    <h1 class="main-title">Pokedex</h1>
     <div class="pokedex">
       <section class="section search-section">
         <div class="search-input-btn">
@@ -33,8 +33,8 @@
         <p class="p">You can search for a pokémon by its id or name</p>
       </section>
 
-      <section class="pokemon">
-        <article class="char">
+      <section class="section pokemon-section">
+        <article class="article char-article">
           <h2 class="title">
             <span id="pokemon-name">Charmander</span
             ><span id="pokemon-id">#4</span>
@@ -49,96 +49,108 @@
           </div>
 
           <div class="types-char">
-            <ul class="list">
+            <ul class="list char-list">
               <li class="list-item" id="weight">
-                <i class="fa-solid fa-weight-hanging"></i>
+                <i class="fa-solid fa-weight-hanging icon"></i>
                 <span class="weight-text">Weight: 85</span>
               </li>
               <li class="list-item" id="height">
-                <i class="fa-solid fa-ruler-vertical"></i>
+                <i class="fa-solid fa-ruler-vertical icon"></i>
                 <span class="height-text">Height: 6</span>
               </li>
             </ul>
-            <ul class="list" id="types">
-              <li class="list-item type-item">Fire</li>
+            <ul class="list types-list" id="types">
+              <li class="list-item type-item fire">Fire</li>
             </ul>
           </div>
         </article>
-        <article class="stats">
+        <article class="article stats-article">
           <div class="card-stat">
             <label for="ps-progress" class="stat-label">PS</label>
-            <progress
-              class="stat-progress"
-              value="39"
-              min="0"
-              max="257"
-              id="ps-progress"
-            ></progress
-            ><span id="hp" class="stat-value">39</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="39"
+                min="0"
+                max="257"
+                id="ps-progress"
+              ></progress>
+              <span id="hp" class="stat-value">39</span>
+            </div>
           </div>
 
           <div class="card-stat">
             <label for="attack-progress" class="stat-label">Attack</label>
-            <progress
-              class="stat-progress"
-              value="52"
-              min="0"
-              max="257"
-              id="attack-progress"
-            ></progress
-            ><span id="attack" class="stat-value">52</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="52"
+                min="0"
+                max="257"
+                id="attack-progress"
+              ></progress>
+              <span id="attack" class="stat-value">52</span>
+            </div>
           </div>
 
           <div class="card-stat">
             <label for="defense-progress" class="stat-label">Defense</label>
-            <progress
-              class="stat-progress"
-              value="43"
-              min="0"
-              max="257"
-              id="defense-progress"
-            ></progress
-            ><span id="defense" class="stat-value">43</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="43"
+                min="0"
+                max="257"
+                id="defense-progress"
+              ></progress>
+              <span id="defense" class="stat-value">43</span>
+            </div>
           </div>
 
           <div class="card-stat">
             <label for="special-attack-progress" class="stat-label"
               >Sp. Attack</label
             >
-            <progress
-              class="stat-progress"
-              value="60"
-              min="0"
-              max="257"
-              id="special-attack-progress"
-            ></progress
-            ><span id="special-attack" class="stat-value">60</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="60"
+                min="0"
+                max="257"
+                id="special-attack-progress"
+              ></progress>
+              <span id="special-attack" class="stat-value">60</span>
+            </div>
           </div>
 
           <div class="card-stat">
             <label for="special-defense-progress" class="stat-label"
               >Sp. Defense</label
             >
-            <progress
-              class="stat-progress"
-              value="50"
-              min="0"
-              max="257"
-              id="special-defense-progress"
-            ></progress
-            ><span id="special-defense" class="stat-value">50</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="50"
+                min="0"
+                max="257"
+                id="special-defense-progress"
+              ></progress>
+              <span id="special-defense" class="stat-value">50</span>
+            </div>
           </div>
 
           <div class="card-stat">
             <label for="speed-progress" class="stat-label">Speed</label>
-            <progress
-              class="stat-progress"
-              value="65"
-              min="0"
-              max="257"
-              id="speed-progress"
-            ></progress
-            ><span id="speed" class="stat-value">65</span>
+            <div class="porcent-value">
+              <progress
+                class="stat-progress"
+                value="65"
+                min="0"
+                max="257"
+                id="speed-progress"
+              ></progress>
+              <span id="speed" class="stat-value">65</span>
+            </div>
           </div>
         </article>
       </section>

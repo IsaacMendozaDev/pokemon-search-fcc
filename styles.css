@@ -12,6 +12,9 @@
   --f-family-pokemon: "Pokemon Solid", system-ui, sans-serif;
   --f-family-tech-mono: "Share Tech Mono", system-ui, sans-serif;
   --f-family-vt323: "VT323", system-ui, sans-serif;
+
+  --font-small: calc(1.6rem + 0.3dvw);
+  --font-medium: calc(2rem + 0.3dvw);
 }
 
 html {
@@ -21,23 +24,18 @@ html {
 
 body {
   max-width: 100dvw;
-  height: 100dvh;
-
-  padding: 0rem 1rem;
-
-  display: grid;
-  place-content: center;
-  justify-items: center;
-  grid-template-columns: minmax(0%, 1200px);
+  min-height: 100dvh;
+  padding: 0rem 1rem 2rem;
 
   background: radial-gradient(circle at bottom left, #1e90ff, transparent 70%),
     radial-gradient(circle at top right, #1e90ff, transparent 70%), #0f0f0f;
 }
-.title {
+.main-title {
   font-size: calc(4rem + 2dvw);
   font-family: var(--f-family-pokemon);
   font-weight: 500;
 
+  text-align: center;
   letter-spacing: 4px;
 
   color: black;
@@ -48,9 +46,10 @@ body {
     -1px 1px 0 #000, 1px 1px 0 #000;
 }
 .pokedex {
-  width: 100%;
+  width: min(100%, 1000px);
 
-  padding: 1rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
 
   font-size: calc(1.8rem + 0.5dvw);
 
@@ -59,32 +58,44 @@ body {
   background: rgba(255, 0, 0, 0.2);
 
   border-radius: 8px;
-  border: 1px solid hsla(0, 97%, 60%, 0.6);
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+
+  .section {
+    margin-bottom: 2rem;
+    font-size: var(--font-medium);
+  }
 
   .search-section {
     width: 100%;
 
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
     text-align: center;
 
     .search-input-btn {
-      max-width: 400px;
-
+      display: flex;
       flex-direction: row;
       justify-content: space-between;
 
       margin: 0 auto;
-      padding: 1rem 1.5rem;
+      padding: 0.5rem 0.5rem 0.5rem 1.5rem;
 
       background: rgba(255, 255, 255, 0.2);
 
       border-radius: 50px;
-      border: 1px solid rgb(201, 201, 201);
+      box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
 
-      /*TODO: FIXING BOTTOM SPACE IN THE INPUT AND COMPLETE THE OTHER STYLES */
+      transition: all 0.6s ease;
+
       .input {
-        padding: 0.3rem;
+        padding: 0.3rem 0.3rem 0;
+        height: auto;
 
-        font-size: calc(1.4rem + 0.5dvw);
+        font-family: var(--f-family-tech-mono);
+        font-size: 1.6rem;
+        line-height: 0.1;
 
         color: #f7f7f7;
 
@@ -104,6 +115,7 @@ body {
       .input:focus {
         border-bottom-color: white;
       }
+
       .input:focus::placeholder {
         opacity: 0;
       }
@@ -113,11 +125,223 @@ body {
         height: 40px;
 
         border-radius: 50%;
+
+        background: black;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        color: white;
+
+        cursor: pointer;
+
+        transition: all 0.3s ease-in-out;
       }
+      .btn:hover {
+        background: white;
+        color: black;
+      }
+    }
+    .search-input-btn:focus-within {
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px,
+        rgb(51, 51, 51) 0px 0px 0px 3px;
+      border-color: #000;
+    }
+
+    .p {
+      font-size: var(--font-medium);
+      text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+      color: #f7f7f7;
     }
   }
 
-  .title {
-    font-size: 1rem;
+  .pokemon-section {
+    width: 100%;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    justify-items: center;
+    align-items: center;
+    gap: 2rem;
+
+    background: #1e8fff4d;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px,
+      rgb(209, 213, 219) 0px 0px 0px 1px inset;
+    border-radius: 8px;
+
+    padding: 2rem 1rem;
+
+    .article {
+      color: #f7f7f7;
+    }
+    .char-article {
+      width: min(100%, 400px);
+      padding: 0.5rem;
+
+      font-size: var(--font-medium);
+      font-weight: 500;
+      color: #f7f7f7;
+      letter-spacing: 2px;
+
+      display: flex;
+      flex-direction: column;
+
+      .title {
+        text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        gap: 0.5rem;
+
+        font-weight: 500;
+      }
+      #sprite-container {
+        width: min(100%, 236px);
+
+        margin: 0 auto;
+        #sprite {
+          width: 100%;
+        }
+      }
+
+      .types-char {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+
+        gap: 1rem;
+        .list {
+          list-style: none;
+
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+
+          gap: 2rem;
+
+          padding: 0.5rem;
+        }
+
+        .char-list {
+          .list-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+
+            font-size: smaller;
+            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+
+            .icon {
+              font-size: 2.6rem;
+              filter: drop-shadow(4px 8px 6px rgba(0, 0, 0, 0.3));
+            }
+          }
+        }
+
+        .types-list {
+          .list-item {
+            border-radius: 8px;
+            padding: 0.5rem;
+
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+              rgba(0, 0, 0, 0.3) 0px 7px 13px -3px,
+              rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+          }
+          .fire {
+            background-color: #f08030;
+          }
+          .water {
+            background-color: #6890f0;
+          }
+          .grass {
+            background-color: #78c850;
+          }
+          .electric {
+            background-color: #f8d030;
+          }
+          .ice {
+            background-color: #98d8d8;
+          }
+          .fighting {
+            background-color: #c03028;
+          }
+          .poison {
+            background-color: #a040a0;
+          }
+          .ground {
+            background-color: #e0c068;
+          }
+          .flying {
+            background-color: #a890f0;
+          }
+          .psychic {
+            background-color: #f85888;
+          }
+          .bug {
+            background-color: #a8b820;
+          }
+          .rock {
+            background-color: #b8a038;
+          }
+          .ghost {
+            background-color: #705898;
+          }
+          .dragon {
+            background-color: #7038f8;
+          }
+          .dark {
+            background-color: #705848;
+          }
+          .steel {
+            background-color: #b8b8d0;
+          }
+          .fairy {
+            background-color: #ee99ac;
+          }
+          .normal {
+            background-color: #a8a878;
+          }
+        }
+      }
+    }
+    .stats-article {
+      display: flex;
+      flex-direction: column;
+
+      gap: 1rem;
+
+      .card-stat {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+
+        .stat-label {
+          width: fit-content;
+          padding: 0.5rem;
+
+          background: #000;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+          border-radius: 6px;
+        }
+        .stat-progress {
+          background-color: #000;
+          border-radius: 10px;
+
+          height: 15px;
+          vertical-align: middle;
+        }
+        .stat-progress::-webkit-progress-bar {
+          background-color: #312d2d;
+          border-radius: 10px;
+        }
+        progress::-webkit-progress-value {
+          background-color: #f7f7f7;
+          border-radius: 10px;
+        }
+      }
+    }
   }
 }
