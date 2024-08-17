@@ -159,6 +159,7 @@ const validateInputUser = (inputUser) => {
   // HERE WE UPDATE THE LAST INPUT USER
   initalInput = inputUser;
 
+  resetPokemonData();
   fetchDataFromPokeAPI(inputUser);
 };
 
@@ -178,6 +179,5 @@ $searchForm.addEventListener("submit", (e) => {
   const inputUser = getInputUser($searchInput.value);
   $searchInput.value = "";
 
-  resetPokemonData();
   validateInputUser(inputUser);
 });
