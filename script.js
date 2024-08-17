@@ -1,45 +1,116 @@
-const $btnSearch = document.getElementById("search-button");
-const $searchInput = document.getElementById("search-input");
+const displayPokemonData = (pokemonData) => {
+  const $pokemonName = document.getElementById("pokemon-name");
+  $pokemonName.textContent = pokemonData.name.toUpperCase();
 
-const fetchPokemonData = async (id) => {
-  const data = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(
-    (res) => res.json()
-  );
+  const $pokemonId = document.getElementById("pokemon-id");
+  $pokemonId.textContent = `#${pokemonData.id}`;
 
+  const $pokemonWeight = document.getElementById("weight");
+  $pokemonWeight.textContent = `Weight: ${pokemonData.weight}`;
+
+  const $pokemonHeight = document.getElementById("height");
+  $pokemonHeight.textContent = `Height: ${pokemonData.height}`;
+
+  const $pokemonSprite = document.getElementById("sprite-container");
+  $pokemonSprite.innerHTML = `<img
+  src="${pokemonData.spriteURL}"
+  alt="${pokemonData.name} front sprite"
+  id="sprite"
+/>`;
+
+  pokemonData.stats.forEach((stat) => {
+    const [statName, statValue] = stat;
+
+    // THIS IS TO DISPLAY THE VALUE OF EACH STAT
+    document.getElementById(`${statName}`).textContent = statValue;
+    // THIS IS ADJUST THE VALUE OF THE PROGRESS BAR OF EACH STAT
+    document.getElementById(`${statName}-progress`).value = statValue;
+  });
+
+  const $typesList = document.getElementById("types");
+  $typesList.innerHTML = "";
+
+  let typesItems = "";
+  pokemonData.types.forEach((type) => {
+    typesItems += `<li class="list-item type-item ${type}">${
+      type.charAt(0).toUpperCase() + type.slice(1) // THIS IS TO UPPER CASE THE FIRST LETTER OF THE WORD
+    }</li>`;
+  });
+  document.getElementById("types").innerHTML = typesItems;
+};
+
+const getPokemonData = (data) => {
   const pokemonTypes = data.types.map((slot) => slot.type.name);
-  const [
-    pokemonHp,
-    pokemonAttack,
-    pokemonDefense,
-    pokemonSpecialAttack,
-    pokemonSpecialDefense,
-    pokemonSpeed,
-  ] = data.stats.map((stat) => stat.base_stat);
+  const statsValues = data.stats.map((stat) => [
+    stat.stat.name,
+    stat.base_stat,
+  ]);
 
   const pokemonData = {
     id: data.id,
     name: data.name,
     weight: data.weight,
     height: data.height,
-    types: [pokemonTypes],
-    hp: pokemonHp,
-    attack: pokemonAttack,
-    defense: pokemonDefense,
-    "special-attack": pokemonSpecialAttack,
-    "special-defense": pokemonSpecialDefense,
-    speed: pokemonSpeed,
+    types: pokemonTypes,
+    stats: statsValues,
+    spriteURL: data.sprites.front_default,
   };
 
-  return pokemonData;
+  displayPokemonData(pokemonData);
 };
 
-const validateInputUser = (input) => {
-  const pokemonData = fetchPokemonData(input);
+const fetchDataFromPokeAPI = async (searchID) => {
+  try {
+    const response = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${searchID}`
+    );
+    if (!response.ok) {
+      throw new Error("Error in request");
+    }
+
+    const data = await response.json();
+
+    getPokemonData(data);
+  } catch (error) {
+    console.error("An error occurred: ", error);
+    alert("Pokémon not found");
+  }
 };
 
-$searchInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") return validateInputUser(e.target.value);
+// THIS IS TO TRACK THE LAST INPUT OF THE USER, TO AVOID AN UNNECESSARY FETCH
+let initalInput = "";
+const validateInputUser = (inputUser) => {
+  if (inputUser.length <= 0 || inputUser <= 0)
+    return alert("Please enter a valid input");
+
+  if (inputUser === initalInput)
+    return alert(
+      "This input has already been searched for, please enter a new one."
+    );
+
+  // HERE WE UPDATE THE LAST INPUT USER
+  initalInput = inputUser;
+
+  fetchDataFromPokeAPI(inputUser);
+};
+
+const getInputUser = (input) => {
+  const inputUser = isNaN(Number(input))
+    ? input.trim().toLowerCase()
+    : Number(input);
+
+  return inputUser;
+};
+
+const $searchForm = document.getElementById("search-form");
+$searchForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const $searchInput = document.getElementById("search-input");
+  const inputUser = getInputUser($searchInput.value);
+  $searchInput.value = "";
+  validateInputUser(inputUser);
 });
-$btnSearch.addEventListener("click", () =>
-  validateInputUser($searchInput.value)
-);
+
+const test = "TEST";
+console.log(test);

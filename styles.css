@@ -75,6 +75,8 @@ body {
     text-align: center;
 
     .search-input-btn {
+      max-width: 300px;
+
       display: flex;
       flex-direction: row;
       justify-content: space-between;
@@ -90,6 +92,8 @@ body {
       transition: all 0.6s ease;
 
       .input {
+        flex: content;
+
         padding: 0.3rem 0.3rem 0;
         height: auto;
 
@@ -174,6 +178,8 @@ body {
     }
     .char-article {
       width: min(100%, 400px);
+      min-height: 390px;
+
       padding: 0.5rem;
 
       font-size: var(--font-medium);
@@ -182,6 +188,7 @@ body {
       letter-spacing: 2px;
 
       display: flex;
+      justify-content: center;
       flex-direction: column;
 
       .title {
@@ -222,6 +229,9 @@ body {
 
           padding: 0.5rem;
         }
+        .list-item {
+          text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
+        }
 
         .char-list {
           .list-item {
@@ -231,7 +241,6 @@ body {
             gap: 0.3rem;
 
             font-size: smaller;
-            text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3);
 
             .icon {
               font-size: 2.6rem;

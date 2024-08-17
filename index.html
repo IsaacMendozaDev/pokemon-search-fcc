@@ -19,49 +19,43 @@
     <h1 class="main-title">Pokedex</h1>
     <div class="pokedex">
       <section class="section search-section">
-        <div class="search-input-btn">
-          <input
-            class="input"
-            type="text"
-            id="search-input"
-            placeholder="Ex: 1 or Bulbasaur"
-          />
-          <button class="btn" id="search-button" role="search">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
+        <form role="search" id="search-form">
+          <div class="search-input-btn">
+            <input
+              class="input"
+              type="text"
+              id="search-input"
+              placeholder="Ex: 1 or Bulbasaur"
+              required
+            />
+            <button class="btn" id="search-button" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </form>
         <p class="p">You can search for a pokémon by its id or name</p>
       </section>
 
       <section class="section pokemon-section">
         <article class="article char-article">
           <h2 class="title">
-            <span id="pokemon-name">Charmander</span
-            ><span id="pokemon-id">#4</span>
+            <span id="pokemon-name"></span><span id="pokemon-id"></span>
           </h2>
 
-          <div id="sprite-container">
-            <img
-              src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png"
-              alt="Charmander front sprite"
-              id="sprite"
-            />
-          </div>
+          <div id="sprite-container"></div>
 
           <div class="types-char">
             <ul class="list char-list">
-              <li class="list-item" id="weight">
+              <li class="list-item">
                 <i class="fa-solid fa-weight-hanging icon"></i>
-                <span class="weight-text">Weight: 85</span>
+                <span class="weight-text" id="weight"></span>
               </li>
-              <li class="list-item" id="height">
+              <li class="list-item">
                 <i class="fa-solid fa-ruler-vertical icon"></i>
-                <span class="height-text">Height: 6</span>
+                <span class="height-text" id="height"></span>
               </li>
             </ul>
-            <ul class="list types-list" id="types">
-              <li class="list-item type-item fire">Fire</li>
-            </ul>
+            <ul class="list types-list" id="types"></ul>
           </div>
         </article>
         <article class="article stats-article">
@@ -70,12 +64,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="39"
+                value=""
                 min="0"
                 max="257"
-                id="ps-progress"
+                id="hp-progress"
               ></progress>
-              <span id="hp" class="stat-value">39</span>
+              <span id="hp" class="stat-value"></span>
             </div>
           </div>
 
@@ -84,12 +78,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="52"
+                value=""
                 min="0"
                 max="257"
                 id="attack-progress"
               ></progress>
-              <span id="attack" class="stat-value">52</span>
+              <span id="attack" class="stat-value"></span>
             </div>
           </div>
 
@@ -98,12 +92,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="43"
+                value=""
                 min="0"
                 max="257"
                 id="defense-progress"
               ></progress>
-              <span id="defense" class="stat-value">43</span>
+              <span id="defense" class="stat-value"></span>
             </div>
           </div>
 
@@ -114,12 +108,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="60"
+                value=""
                 min="0"
                 max="257"
                 id="special-attack-progress"
               ></progress>
-              <span id="special-attack" class="stat-value">60</span>
+              <span id="special-attack" class="stat-value"></span>
             </div>
           </div>
 
@@ -130,12 +124,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="50"
+                value=""
                 min="0"
                 max="257"
                 id="special-defense-progress"
               ></progress>
-              <span id="special-defense" class="stat-value">50</span>
+              <span id="special-defense" class="stat-value"></span>
             </div>
           </div>
 
@@ -144,12 +138,12 @@
             <div class="porcent-value">
               <progress
                 class="stat-progress"
-                value="65"
+                value=""
                 min="0"
                 max="257"
                 id="speed-progress"
               ></progress>
-              <span id="speed" class="stat-value">65</span>
+              <span id="speed" class="stat-value"></span>
             </div>
           </div>
         </article>
