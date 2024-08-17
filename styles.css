@@ -29,6 +29,9 @@ body {
 
   background: radial-gradient(circle at bottom left, #1e90ff, transparent 70%),
     radial-gradient(circle at top right, #1e90ff, transparent 70%), #0f0f0f;
+
+  opacity: 0;
+  animation: fadeIn 3s forwards;
 }
 .main-title {
   font-size: calc(4rem + 2dvw);
@@ -203,6 +206,7 @@ body {
       }
       #sprite-container {
         width: min(100%, 236px);
+        height: 240px;
 
         margin: 0 auto;
         #sprite {
@@ -336,35 +340,37 @@ body {
           border-radius: 6px;
         }
         .stat-progress {
-          background-color: #000;
-          border-radius: 10px;
-
           height: 15px;
-          vertical-align: middle;
+          appearance: none;
         }
+
         .stat-progress::-webkit-progress-bar {
-          background-color: #312d2d;
-          border-radius: 10px;
+          background-color: #eee;
+          border-radius: 20px;
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px,
+            rgb(51, 51, 51) 0px 0px 0px 3px;
         }
-        progress::-webkit-progress-value {
-          background-color: #f7f7f7;
-          border-radius: 10px;
+
+        .stat-progress::-webkit-progress-value {
+          background-color: var(--progress-color, red);
+          transition: background-color 0.3s;
+          border-radius: 20px;
         }
       }
     }
   }
 }
-#loading {
-  display: none;
-
-  width: 100%;
+#loading-svg {
+  max-width: 280px;
 
   text-align: center;
 
   animation: blink 1s ease-in-out infinite;
-  .img {
-    max-width: 280px;
-  }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 3s forwards;
 }
 @keyframes blink {
   0% {
@@ -380,5 +386,8 @@ body {
     transform: scale(1);
   }
 }
-
-/* todo: PUT THE ICONS OF THE WEIGHT AND HEIGHT IN THE BOTTOM * /;
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
