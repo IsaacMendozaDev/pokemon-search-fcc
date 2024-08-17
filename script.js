@@ -1,15 +1,33 @@
+const updateDOMElementText = (id, text) => {
+  document.getElementById(id).textContent = text;
+};
+
+const resetPokemonData = () => {
+  const fields = ["pokemon-name", "pokemon-id", "weight", "height"];
+  fields.forEach((field) => updateDOMElementText(field, ""));
+
+  document.getElementById("sprite-container").innerHTML = "";
+  document.getElementById("types").innerHTML = "";
+
+  const stats = [
+    "hp",
+    "attack",
+    "defense",
+    "special-attack",
+    "special-defense",
+    "speed",
+  ];
+  stats.forEach((stat) => {
+    updateDOMElementText(stat, "");
+    document.getElementById(`${stat}-progress`).value = 0;
+  });
+};
+
 const displayPokemonData = (pokemonData) => {
-  const $pokemonName = document.getElementById("pokemon-name");
-  $pokemonName.textContent = pokemonData.name.toUpperCase();
-
-  const $pokemonId = document.getElementById("pokemon-id");
-  $pokemonId.textContent = `#${pokemonData.id}`;
-
-  const $pokemonWeight = document.getElementById("weight");
-  $pokemonWeight.textContent = `Weight: ${pokemonData.weight}`;
-
-  const $pokemonHeight = document.getElementById("height");
-  $pokemonHeight.textContent = `Height: ${pokemonData.height}`;
+  updateDOMElementText("pokemon-name", pokemonData.name.toUpperCase());
+  updateDOMElementText("pokemon-id", `#${pokemonData.id}`);
+  updateDOMElementText("weight", `Weight: ${pokemonData.weight}`);
+  updateDOMElementText("height", `Height: ${pokemonData.height}`);
 
   const $pokemonSprite = document.getElementById("sprite-container");
   $pokemonSprite.innerHTML = `<img
@@ -22,7 +40,7 @@ const displayPokemonData = (pokemonData) => {
     const [statName, statValue] = stat;
 
     // THIS IS TO DISPLAY THE VALUE OF EACH STAT
-    document.getElementById(`${statName}`).textContent = statValue;
+    updateDOMElementText(`${statName}`, statValue);
     // THIS IS ADJUST THE VALUE OF THE PROGRESS BAR OF EACH STAT
     document.getElementById(`${statName}-progress`).value = statValue;
   });
@@ -59,14 +77,30 @@ const getPokemonData = (data) => {
   displayPokemonData(pokemonData);
 };
 
+const setLoadingState = (isLoading) => {
+  const $loadingContainer = document.getElementById("loading");
+
+  const svgLoading =
+    '<?xml version="1.0" encoding="utf-8"?><svg class="img" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M24 44C35.0457 44 44 35.0457 44 24C44 12.9543 35.0457 4 24 4C12.9543 4 4 12.9543 4 24C4 35.0457 12.9543 44 24 44Z" stroke="#000000" stroke-width="4" stroke-linejoin="round"/><circle cx="24" cy="24" r="6" fill="#2F88FF" stroke="#000000" stroke-width="4" stroke-linejoin="round"/><path d="M30 24H44" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 24H18" stroke="#000000" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="24" r="2" fill="white"/></svg>';
+
+  if (isLoading) {
+    $loadingContainer.style.display = "block";
+
+    $loadingContainer.innerHTML = svgLoading;
+  } else {
+    $loadingContainer.style.display = "none";
+    $loadingContainer.innerHTML = "";
+  }
+};
+
 const fetchDataFromPokeAPI = async (searchID) => {
   try {
+    setLoadingState(true);
+
     const response = await fetch(
       `https://pokeapi.co/api/v2/pokemon/${searchID}`
     );
-    if (!response.ok) {
-      throw new Error("Error in request");
-    }
+    if (!response.ok) throw new Error("Error in request");
 
     const data = await response.json();
 
@@ -74,6 +108,8 @@ const fetchDataFromPokeAPI = async (searchID) => {
   } catch (error) {
     console.error("An error occurred: ", error);
     alert("Pokémon not found");
+  } finally {
+    setLoadingState(false);
   }
 };
 
@@ -109,8 +145,9 @@ $searchForm.addEventListener("submit", (e) => {
   const $searchInput = document.getElementById("search-input");
   const inputUser = getInputUser($searchInput.value);
   $searchInput.value = "";
+
+  resetPokemonData();
   validateInputUser(inputUser);
 });
 
-const test = "TEST";
-console.log(test);
+//todo: Make the animation of the progress bar.
